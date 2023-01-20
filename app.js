@@ -36,21 +36,56 @@ function playRound(playerSelection, computerSelection) {
           return tie();
       }
     default:
-      return "Something went wrong";
+      alert("Invalid Input");
   }
 }
 
-// Win message
+// Win round
 function win(playerSelection, computerSelection) {
-  return `You Win! ${playerSelection} beats ${computerSelection}`;
+  alert(`You Win! ${playerSelection} beats ${computerSelection}`);
+  return "win";
 }
 
-// Loss message
+// Lose round
 function loss(playerSelection, computerSelection) {
-  return `You Lose! ${computerSelection} beats ${playerSelection}`;
+  alert(`You Lose! ${computerSelection} beats ${playerSelection}`);
+  return "loss";
 }
 
-// Tie message
+// Tie round
 function tie() {
-  return "It's a tie!";
+  alert("It's a tie!");
+  return "tie";
 }
+
+// Plays a 5 round game that keeps score and reports a winner or loser at the end.
+function game() {
+  let playerScore = 0;
+  let computerScore = 0;
+  let playerSelection, computerSelection, roundResult;
+
+  for (let i = 0; i < 5; i++) {
+    playerSelection = prompt(
+      `Round ${i + 1} out of 5. Rock, paper or scissors?`,
+      "Rock"
+    );
+    computerSelection = getComputerChoice();
+    roundResult = playRound(playerSelection, computerSelection);
+
+    if (roundResult == "win") {
+      playerScore += 1;
+    } else if (roundResult == "loss") {
+      computerScore += 1;
+    }
+  }
+
+  if (playerScore > computerScore) {
+    alert("End of game, player wins!");
+  } else if (computerScore > playerScore) {
+    alert("End of game, computer wins!");
+  } else {
+    alert("End of game, it's a tie!");
+  }
+}
+
+game();
